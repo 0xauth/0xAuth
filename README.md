@@ -44,7 +44,7 @@ If any of the token elements cointans a reserved character (colon and semicolon)
 aed4:0\:0:a\;b
 ```
 
-The backslash itself is always encoded as \\\\.
+The backslash itself is always encoded as `\\`.
 
 0xAuth supports any type of blockchain and address (and any public/private key schema).
 
