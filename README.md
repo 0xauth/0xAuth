@@ -39,7 +39,7 @@ Splitting the string by semicolon and colon, we have the following array:
   [ 'fb7c' ]                      // extra field, starting with a random string
 ]
 ```
-If any of the token elements cointans a reserver character (colon and semicolon), the character can be encoded using a backslash. For example, if the 4th element contains ['aed4', '0:0', 'a;b'] the resulting field would be:
+If any of the token elements cointans a reserved character (colon and semicolon), the character can be encoded using a backslash. For example, if the 4th element contains ['aed4', '0:0', 'a;b'] the resulting field would be:
 ```
 aed4:0\:0:a\;b
 ```
