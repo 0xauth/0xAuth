@@ -48,7 +48,7 @@ The backslash itself is always encoded as `\\`.
 
 0xAuth supports any type of blockchain and address (and any public/private key schema).
 
-The first implementation (Node/JS) will support solidity base addresses, like Ethereum and Tron, and Tezos. More chains will be added in the following.
+The first implementation (Node/JS) will support initally Tron, after Ethereum, and later Tezos and many other chains.
 
 Examples of accepted address fields are:
 ```
