@@ -120,8 +120,7 @@ The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra 
 ```
 ## Implementations
 
-* [0xauth-js](https://github.com/0xauth/0xauth-js)  
-Javascript implementation supporting Solidity addresses for Tron and Ethereum (coming soon), available on the npm registry as `0xauth`.
+* [0xauth-js](https://github.com/0xauth/0xauth-js) — Javascript implementation supporting Solidity addresses for Tron and Ethereum (coming soon), available on the npm registry as `0xauth`.
 
 ## License
 MIT
