@@ -18,7 +18,7 @@ All that is needed is a signature verification.
 * The frontend receives the signatures and send it to the backend.
 * The backend verifies the validity of the signature and generates a token to be used for the future requests.
 
-###The sign in flow
+### The sign in flow
 
 It is very similar to the signup flow. In fact, the website checks if an authentication session is active and if not replicate the points 2, 3, 4, 5, 6 and 7 of the sign up process. The difference is that in a real scenario, during the signup the user is probably saved in a database, while during the sign in the backend will just check if the user has been previously saved.
 
@@ -57,7 +57,7 @@ trx:TGYGnEiyHZrR8XjitLjkrHiGmPysYXCUCm
 tez:tz1NUbGVwYkam4cVe7SZoweu75HnZL5D98hW
 ```
 
-##The signed token
+## The signed token
 When the JSON authorization token is signed, a new field with the signature is added to the authorization token. The new field contains info about the signature and the signature itself. For example, if the authorization token has been signed by Metamask using v_2, the signature string is
 ```
 0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,2
@@ -86,7 +86,7 @@ For Tron, the signed token would be something like:
 0xAuth:1;com.example.Auth;1556997887;fb7c;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:1
 ```
 
-##The typical use case
+## The typical use case
 The process describes above is the base.
 
 In a real scenario the user's address can be saved in a database and associated to a profile.
@@ -118,9 +118,10 @@ The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra 
 ```
 0xAuth:1;com.tweedentity;1556997887;98fa,1,t,946957110411005953;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
 ```
-## The implementation
-At the moment, a Javascript implementation of 0xAuth supporting Solidity addresses for Ethereum and Tron is available on the npm registry.
-The code is open source: https://github.com/0xauth/0xauth-js
+## Implementations
+
+* [0xauth-js](https://github.com/0xauth/0xauth-js)
+Javascript implementation supporting Solidity addresses for Tron and Ethereum (coming soon), available on the npm registry as `0xauth`.
 
 ## License
 MIT
