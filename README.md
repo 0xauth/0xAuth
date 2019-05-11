@@ -127,7 +127,7 @@ Javascript implementation supporting Solidity addresses for Tron and Ethereum (c
 MIT
 
 ## Author
-[Francesco Sullo](https://francesco.sullo.co) <francesco@sullo.co>
+[Francesco Sullo](https://francesco.sullo.co), <francesco@sullo.co>
 
 ## Version
 draft-0.0.3, May 3rd, 2019
