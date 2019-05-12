@@ -27,24 +27,50 @@ The authorization token contains the data necessary for the authentication.
 
 Here an example of a valid authorization token:
 ```
-0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c
+0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello;8d
 ```
 
 Splitting the string by semicolon and colon, we have the following array:
 ```
 [
-  [ '0xAuth', '1' ],              // protocol and version
+  [ '0xAuth', '1' ],                // protocol and version
   [ 'com.example.Auth' ],           // reverse domain name notation
-  [ '1556997887', '1559000000' ], // Unix timestamp at creation (required) and expiration (optional)
-  [ 'fb7c' ]                      // extra field, starting with a random string
+  [ '1556997887', '1559000000' ],   // Unix timestamp at creation (required) and expiration (optional)
+  [ 'fB7c'],                        // random 4-chars string [a-zA-Z0-9_]
+  [ 'Hello' ],                      // optional extra field
+  [ '8d' ]                          // validator hex char
 ]
 ```
-If any of the token elements cointans a reserved character (colon and semicolon), the character can be encoded using a backslash. For example, if the 4th element contains ['aed4', '0:0', 'a;b'] the resulting field would be:
+The first element represents the protocol and its version.
+
+The second element identifies the realm of usage, using a reverse domain name notation.
+
+The third element includes the timestamp at the creation of the token and, optionally, the timestamp of its expiration.
+
+The fourth element includes a random string satisfying the regex `/^\w{4}$/`.
+
+The fifth element is empty by default, but usable for any extra data.
+
+The sixth element is a validation char in hex format. It is the last 2 characters of the sha3 of the token.
+For example, in the case above, it would be:
+
 ```
-aed4:0\:0:a\;b
+sha3('0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello')
+
+> 0x03d0a874781576da1e580ec48a326ee01b07003570d4acbfb509de745751648d
+
+> 8d
 ```
 
-The backslash itself is always encoded as `\\`.
+## Special chars
+
+The extra field can cointain information containing reserved characters (colon and semicolon). In this case, the field must be encoded. For example, if the 5th element contains ['aed4', 'localhost:8090'] the string `localhost:8090` could be base64-encoded, like:
+```
+aed4:bG9jYWxob3N0OjgwOTA=
+```
+In any case, the 0xAuth protocol does not set any requirement for the encoding of choice because the extra field is supposed to be handled by the application using the protocol.
+
+## Chains support
 
 0xAuth supports any type of blockchain and address (and any public/private key schema).
 
@@ -52,19 +78,19 @@ The first implementation (Node/JS) will support initally Tron, after Ethereum, a
 
 Examples of accepted address fields are:
 ```
-eth:0x4811a2cd0255ebf0533e373e48faec692c45b193
+eth:0xF067c1f703e877f731EcE8A0B9472F50Befd4462
 trx:TGYGnEiyHZrR8XjitLjkrHiGmPysYXCUCm
-tez:tz1NUbGVwYkam4cVe7SZoweu75HnZL5D98hW
+tez:tz1NUbGVwjkrHiGmPysYXCUCmYkam4cVe7Sz
 ```
 
 ## The signed token
-When the JSON authorization token is signed, a new field with the signature is added to the authorization token. The new field contains info about the signature and the signature itself. For example, if the authorization token has been signed by Metamask using v_2, the signature string is
+When the JSON authorization token is signed, a new field with the signature is added to the authorization token. The new field contains info about the signature and the signature itself. For example, if the authorization token has been signed by Metamask using [Sign Typed Data v1](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v1), the signature string is
 ```
-0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,2
+0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,std1
 ```
 and the entire signed token is something like:
 ```
-0xAuth:1;com.example.Auth;1556997887;fb7c;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,2
+0xAuth:1;com.example.Auth;1556997887;fb7c;2A;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,std1
 ```
 Splitting it following the approach used before, this becomes
 ```
@@ -72,22 +98,26 @@ Splitting it following the approach used before, this becomes
   [ '0xAuth', '1' ],
   [ 'com.example.Auth' ],
   [ '1556997887' ],
-  [ 'fb7c' ]
+  [ 'fb7c' ],
+  [ '2A' ],
   [ 'eth', '0x4811a2cd0255ebf0533e373e48faec692c45b193' ],
-  [ '0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c', 'web3', '2' ]
+  [ '0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c', 'web3', 'std1' ]
 ]
 ```
+
+(Other accepted format from MetaMask are `ps` ([Personal Sign](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Personal_Sign)) and `std3` ([Sign Typed Data v3](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v3)).)
 
 The two added elements compared with the authorization token specify blockchain and address of the signer, and the signature itself.
 This way, the signed token contains anything is needed to verify it.
 
-For Tron, the signed token would be something like:
+For Tron, which uses a format similar to Personal Sign in MetaMask, the signed token would be something like:
 ```
-0xAuth:1;com.example.Auth;1556997887;fb7c;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:1
+0xAuth:1;com.example.Auth;1556997887;fb7c;2A;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:ps
 ```
 
-## The typical use case
-The process describes above is the base.
+Any signature format must be registered to be adopted by the standard.
+
+## Usages
 
 In a real scenario the user's address can be saved in a database and associated to a profile.
 
@@ -126,7 +156,7 @@ The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra 
 MIT
 
 ## Author
-[Francesco Sullo](https://francesco.sullo.co), <francesco@sullo.co>
+[Francesco Sullo](https://francesco.sullo.co), San Francisco – <francesco@sullo.co>
 
 ## Version
-draft-0.0.3, May 3rd, 2019
+draft-0.0.4, May 11th, 2019
