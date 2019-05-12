@@ -10,6 +10,7 @@ Websites already use OAuth and similar protocols to allow an external identity p
 All that is needed is a signature verification.
 
 ### The sign up flow
+
 * The user loads a website which requires authorization, exposing its default account address.
 * The website's frontend recognizes address and platform and passes the data to the backend.
 * The website's backend generates an authorization token.
@@ -22,7 +23,8 @@ All that is needed is a signature verification.
 
 It is very similar to the signup flow. In fact, the website checks if an authentication session is active and if not replicate the points 2, 3, 4, 5, 6 and 7 of the sign up process. The difference is that in a real scenario, during the signup the user is probably saved in a database, while during the sign in the backend will just check if the user has been previously saved.
 
-##The authorization token
+## The authorization token
+
 The authorization token contains the data necessary for the authentication.
 
 Here an example of a valid authorization token:
@@ -84,6 +86,7 @@ tez:tz1NUbGVwjkrHiGmPysYXCUCmYkam4cVe7Sz
 ```
 
 ## The signed token
+
 When the JSON authorization token is signed, a new field with the signature is added to the authorization token. The new field contains info about the signature and the signature itself. For example, if the authorization token has been signed by Metamask using [Sign Typed Data v1](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v1), the signature string is
 ```
 0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,t1
@@ -153,7 +156,9 @@ The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra 
 * [0xauth-js](https://github.com/0xauth/0xauth-js) — Javascript implementation supporting Solidity addresses for Tron and Ethereum (coming soon), available on the npm registry as `0xauth`.
 
 ## License
-MIT
+
+[The MIT License](http://opensource.org/licenses/MIT)
+
 
 ## Author
 [Francesco Sullo](https://francesco.sullo.co), San Francisco – <francesco@sullo.co>
