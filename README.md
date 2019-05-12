@@ -86,11 +86,11 @@ tez:tz1NUbGVwjkrHiGmPysYXCUCmYkam4cVe7Sz
 ## The signed token
 When the JSON authorization token is signed, a new field with the signature is added to the authorization token. The new field contains info about the signature and the signature itself. For example, if the authorization token has been signed by Metamask using [Sign Typed Data v1](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v1), the signature string is
 ```
-0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,std1
+0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,t1
 ```
 and the entire signed token is something like:
 ```
-0xAuth:1;com.example.Auth;1556997887;fb7c;2A;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,std1
+0xAuth:1;com.example.Auth;1556997887;fb7c;2A;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,t1
 ```
 Splitting it following the approach used before, this becomes
 ```
@@ -101,11 +101,11 @@ Splitting it following the approach used before, this becomes
   [ 'fb7c' ],
   [ '2A' ],
   [ 'eth', '0x4811a2cd0255ebf0533e373e48faec692c45b193' ],
-  [ '0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c', 'web3', 'std1' ]
+  [ '0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c', 'web3', 't1' ]
 ]
 ```
 
-(Other accepted format from MetaMask are `ps` ([Personal Sign](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Personal_Sign)) and `std3` ([Sign Typed Data v3](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v3)).)
+(Other format supported by MetaMask are `ps` ([Personal Sign](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Personal_Sign)) and `t3` ([Sign Typed Data v3](https://metamask.github.io/metamask-docs/API_Reference/Signing_Data/Sign_Typed_Data_v3)).)
 
 The two added elements compared with the authorization token specify blockchain and address of the signer, and the signature itself.
 This way, the signed token contains anything is needed to verify it.
