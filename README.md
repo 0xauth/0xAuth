@@ -27,7 +27,7 @@ The authorization token contains the data necessary for the authentication.
 
 Here an example of a valid authorization token:
 ```
-0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello;8d
+0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello;03
 ```
 
 Splitting the string by semicolon and colon, we have the following array:
@@ -38,7 +38,7 @@ Splitting the string by semicolon and colon, we have the following array:
   [ '1556997887', '1559000000' ],   // Unix timestamp at creation (required) and expiration (optional)
   [ 'fB7c'],                        // random 4-chars string [a-zA-Z0-9_]
   [ 'Hello' ],                      // optional extra field
-  [ '8d' ]                          // validator hex char
+  [ '03' ]                          // validator hex char
 ]
 ```
 The first element represents the protocol and its version.
@@ -51,7 +51,7 @@ The fourth element includes a random string satisfying the regex `/^\w{4}$/`.
 
 The fifth element is empty by default, but usable for any extra data.
 
-The sixth element is a validation char in hex format. It is the last 2 characters of the sha3 of the token.
+The sixth element is a validation char in hex format. It is the first hex char of the sha3 of the token.
 For example, in the case above, it would be:
 
 ```
@@ -59,7 +59,7 @@ sha3('0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello')
 
 > 0x03d0a874781576da1e580ec48a326ee01b07003570d4acbfb509de745751648d
 
-> 8d
+> 03
 ```
 
 ## Special chars
