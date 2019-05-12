@@ -49,7 +49,7 @@ The second element identifies the realm of usage, using a reverse domain name no
 
 The third element includes the timestamp at the creation of the token and, optionally, the timestamp of its expiration.
 
-The fourth element includes a random string satisfying the regex `/^\w{4}$/`.
+The fourth element includes a random base64 string.
 
 The fifth element is empty by default, but usable for any extra data.
 
