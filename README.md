@@ -36,7 +36,7 @@ Splitting the string by semicolon and colon, we have the following array:
   [ '0xAuth', '1' ],                // protocol and version
   [ 'com.example.Auth' ],           // reverse domain name notation
   [ '1556997887', '1559000000' ],   // Unix timestamp at creation (required) and expiration (optional)
-  [ 'fB7c'],                        // random 4-chars string [a-zA-Z0-9_]
+  [ 'fB7z'],                        // random 4-chars base64 string
   [ 'Hello' ],                      // optional extra field
   [ '03' ]                          // validator hex char
 ]
