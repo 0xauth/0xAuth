@@ -149,7 +149,7 @@ Where
 
 The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra values, like the twitter user id, in the x field (nounce, Tweedentity version, identity provider and ID) and a signed token will be something like this:
 ```
-0xAuth:1;com.tweedentity;1556997887;98fa,1,t,946957110411005953;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
+0xAuth:1;com.tweedentity;1556997887;98fa;1,t,946957110411005953;A2;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
 ```
 ## Implementations
 
