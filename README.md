@@ -118,7 +118,7 @@ For Tron, which uses a format similar to Personal Sign in MetaMask, the signed t
 0xAuth:1;com.example.Auth;1556997887;fb7c;2A;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:ps
 ```
 
-Any signature format must be registered to be adopted by the standard, see the [0xAuth Registry](Registry.md)
+When the protocol is stable, any signature format will be registered to be adopted by the standard.
 
 ## Usages
 
