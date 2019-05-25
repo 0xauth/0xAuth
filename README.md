@@ -32,7 +32,7 @@ Here an example of a valid authorization token:
 0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello;03
 ```
 
-Splitting the string by semicolon and colon, we have the following array:
+Splitting the string by colons and semicolons, we have the following array:
 ```
 [
   [ '0xAuth', '1' ],                // protocol and version
@@ -127,7 +127,8 @@ In a real scenario the user's address can be saved in a database and associated 
 Inside companies, an employee's address can be pre-approved waiting for confirmation at the first login.
 
 Also, an authorization token can be released to the user, via cookies or jwt, to avoid to repeat the verification.
-Identity
+
+### Identity
 
 0xAuth focuses on the authorization process. But a user's wallet can be associated with social accounts, national IDs, etc.
 Identity providers like uPort or Origin Protocol base their approach on standards like the ERC725 and ERC735, acting as guaranters of the identity.
