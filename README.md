@@ -153,9 +153,11 @@ The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra 
 0xAuth:1;com.tweedentity;1556997887;98fa;1:t:946957110411005953;A2;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
 ```
 
-## Not about U2F
+## U2F and other second factor authentication protocols
 
-0xAuth implements an approach similar to U2F, but simplified and minimalistic. The two protocol are not in conflict. While 0xAuth aims to allow a wallet to identity itself and get an authorization to access a service, U2F is a strong protocol for second factor authentication. They can definitely be used together. For example, a dApp can implement 0xAuth to identify the user and 2UF to confirm it requiring a Yubikey or Google Authenticator.
+0xAuth implements an approach similar to 2FA protocol like U2F, simplifying the process to allow any wallet to be used for it.  
+Protocols like 0xAuth and U2F are not in conflict. While 0xAuth aims to allow a wallet to identity itself and get an authorization to access a service, U2F is a strong protocol for second factor authentication, with more advanced features (to block MiTM attacks, etc.)  
+They can definitely be used together. For example, a dApp can implement 0xAuth to identify the user and 2UF to confirm it requiring a Yubikey or Google Authenticator.
 
 ## Implementations
 
