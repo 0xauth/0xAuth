@@ -53,15 +53,15 @@ The fourth element includes a random base64 string.
 
 The fifth element is empty by default, but usable for any extra data.
 
-The sixth element is a validation char in hex format. It is the first hex char of the sha3 of the token.
+The sixth element is a validation char in hex format. It is the first char of the sha256 of the token.
 For example, in the case above, it would be:
 
 ```
-sha3('0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello')
+sha256('0xAuth:1;com.0xnil.Auth;1556997887;fb7c')
 
-> 0x03d0a874781576da1e580ec48a326ee01b07003570d4acbfb509de745751648d
+> b35bf72ff244bc57f4b6d35187e27be1d3ab042f0b8e5047f3bfb8e2e1620e54
 
-> 03
+> b3
 ```
 
 ## Special chars
