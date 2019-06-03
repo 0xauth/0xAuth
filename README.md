@@ -160,7 +160,7 @@ They can definitely be used together. For example, a dApp can implement 0xAuth t
 
 ## Implementations
 
-* [0xauth-js](https://github.com/0xauth/0xauth-js) — Javascript implementation supporting Solidity addresses for Tron and Ethereum (for now, only typed v1), available on the npm registry as `0xauth`.
+* [0xauth-js](https://github.com/0xauth/0xauth-js) — Javascript implementation supporting Solidity addresses for Tron and Ethereum, available on the npm registry as `0xauth`.
 
 ## License
 
