@@ -1,6 +1,8 @@
 # 0xAuth
 A minimalistic protocol for decentralized authentication
 
+# BE CAREFUL, THIS IS AN EARLY DRAFT OF THE BASIC IDEA. IT IS A WORK-IN-PROGRESS
+
 ## Introduction
 
 A cryptocurrency wallet can be used to sign arbitrary strings using the private key of the active account. This feature can be used to generate an authentication protocol which eliminate any need for usernames and passwords.
