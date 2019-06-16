@@ -1,8 +1,6 @@
 # 0xAuth
 A minimalistic protocol for decentralized authentication
 
-# BE CAREFUL, THIS IS AN EARLY DRAFT OF THE BASIC IDEA. IT IS A WORK-IN-PROGRESS
-
 ## Introduction
 
 A cryptocurrency wallet can be used to sign arbitrary strings using the private key of the active account. This feature can be used to generate an authentication protocol which eliminate any need for usernames and passwords.
@@ -31,7 +29,7 @@ The authorization token contains the data necessary for the authentication.
 
 Here an example of a valid authorization token:
 ```
-0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;Hello;03
+0xAuth:1;com.example.Auth;1556997887:1559000000;fb7c;user=John
 ```
 
 Splitting the string by colons and semicolons, we have the following array:
@@ -41,8 +39,7 @@ Splitting the string by colons and semicolons, we have the following array:
   [ 'com.example.Auth' ],           // reverse domain name notation of the token issuer
   [ '1556997887', '1559000000' ],   // Unix timestamp at creation (required) and expiration (optional)
   [ 'fB7z'],                        // random 4-chars base64 string
-  [ 'Hello' ],                      // optional extra field
-  [ '03' ]                          // validator hex char
+  [ 'user=John' ]                      // optional extra field
 ]
 ```
 The first element represents the protocol and its version.
@@ -54,17 +51,6 @@ The third element includes the timestamp at the creation of the token and, optio
 The fourth element includes a random base64 string.
 
 The fifth element is empty by default, but usable for any extra data.
-
-The sixth element is a validation char in hex format. It is the first char of the sha256 of the token.
-For example, in the case above, it would be:
-
-```
-sha256('0xAuth:1;com.0xnil.Auth;1556997887;fb7c')
-
-> b35bf72ff244bc57f4b6d35187e27be1d3ab042f0b8e5047f3bfb8e2e1620e54
-
-> b3
-```
 
 ## Special chars
 
@@ -95,7 +81,7 @@ When the JSON authorization token is signed, a new field with the signature is a
 ```
 and the entire signed token is something like:
 ```
-0xAuth:1;com.example.Auth;1556997887;fb7c;2A;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,t1
+0xAuth:1;com.example.Auth;1556997887;fb7c;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c,web3,t1
 ```
 Splitting it following the approach used before, this becomes
 ```
@@ -104,7 +90,6 @@ Splitting it following the approach used before, this becomes
   [ 'com.example.Auth' ],
   [ '1556997887' ],
   [ 'fb7c' ],
-  [ '2A' ],
   [ 'eth', '0x4811a2cd0255ebf0533e373e48faec692c45b193' ],
   [ '0xb646ff642a60680cf6f5d7ce650e2fd2df26c175ec7990f1e2a65ad8fdfdb105786a36763fb6bf9f30bdd5175c748723330e5fe0e843bbbb034948b2cf23f2e21c', 'web3', 't1' ]
 ]
@@ -117,7 +102,7 @@ This way, the signed token contains anything is needed to verify it.
 
 For Tron, which uses a format similar to Personal Sign in MetaMask, the signed token would be something like:
 ```
-0xAuth:1;com.example.Auth;1556997887;fb7c;2A;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:ps
+0xAuth:1;com.example.Auth;1556997887;fb7c;trx:TXtMUJpGugXqoCRdvzEGPXqRZU7vbf2SnF;0x95d1bc003c5648cf410b2067294a5ede28bcd76ff56b8c4db83377307599c8e15b52c62b211be715be9601cf195c42463aaf80196598f972ccb5e04457ea171f1b:tronweb:ps
 ```
 
 When the protocol is stable, any signature format will be registered to be adopted by the standard.
@@ -152,7 +137,7 @@ Where
 
 The version 2 of Tweedentity will extend the 0xAuth protocol. It will add extra values, like the twitter user id, in the x field (nounce, Tweedentity version, identity provider and ID) and a signed token will be something like this:
 ```
-0xAuth:1;com.tweedentity;1556997887;98fa;1:t:946957110411005953;A2;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
+0xAuth:1;com.tweedentity;1556997887;98fa;1:t:946957110411005953;eth:0x4811a2cd0255ebf0533e373e48faec692c45b193;0xa1c056f46db4a4c6d69166a5f0e534f4e10f3b7e8e7c45f9d9b1b9c8dbbc326456ee488bc69dc2b232be0d88004e6a0ad40344560b6fc0a35ca48c08eb2bc32b1b,web3,3
 ```
 
 ## U2F and other second factor authentication protocols
@@ -173,4 +158,4 @@ They can definitely be used together. For example, a dApp can implement 0xAuth t
 [Francesco Sullo](https://francesco.sullo.co), San Francisco – <francesco@sullo.co>
 
 ## Version
-draft-0.0.4, May 11th, 2019
+draft-0.0.5, June 16th, 2019
