@@ -158,4 +158,4 @@ They can definitely be used together. For example, a dApp can implement 0xAuth t
 [Francesco Sullo](https://francesco.sullo.co), San Francisco – <francesco@sullo.co>
 
 ## Version
-draft-0.0.5, June 16th, 2019
+draft-0.0.6, June 16th, 2019
