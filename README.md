@@ -11,7 +11,7 @@ All that is needed is a signature verification.
 
 ### The sign up flow
 
-* The user loads a website which requires authorization, exposing its default account address.
+* The user loads a website which requires authorization, exposing its default account address (only HTTPS should be allowed, of course).
 * The website's frontend recognizes address and platform and passes the data to the backend.
 * The website's backend generates an authorization token.
 * The website's frontend generates a request to the wallet for signing the authorization token.
